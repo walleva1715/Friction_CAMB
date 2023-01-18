@@ -17,7 +17,7 @@ sigma_boltz = 5.670374419e-8
 k_B = 1.380649e-23
 eV = 1.602176634e-19
 
-m_p = 1.67262192369e-27  # 1.672623e-27
+m_p = 1.67262192369e-27
 m_e = 9.1093837015e-31
 
 m_H = 1.673575e-27  # av. H atom
@@ -25,7 +25,7 @@ m_He4 = 6.646479073e-27  # He4
 mass_ratio_He_H = m_He4 / m_H
 
 Gyr = 365.25 * 86400 * 1e9
-Mpc = 3.085677581e22  # seem to be different definitions of this?
+Mpc = 3.085677581e22
 MPc_in_sec = Mpc / c  # Mpc/c = 1.029272d14 in SI units
 
 barssc0 = k_B / m_p / c ** 2
