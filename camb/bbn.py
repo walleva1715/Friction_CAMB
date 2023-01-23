@@ -9,10 +9,8 @@ import os
 from scipy.interpolate import RectBivariateSpline
 from .constants import m_H, m_He4, default_nnu
 
-default_interpolation_table = 'PRIMAT_Yp_DH_ErrorMC_2021.dat'
-
-
 # previously (< 1.4.0) default_interpolation_table = 'PArthENoPE_880.2_standard.dat'
+default_interpolation_table = 'PRIMAT_Yp_DH_ErrorMC_2021.dat'
 
 
 def yhe_to_ypBBN(Yp):
