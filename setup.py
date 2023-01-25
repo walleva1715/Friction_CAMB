@@ -276,6 +276,13 @@ class BDistWheelNonPure(_bdist_wheel):
         self.root_is_pure = False
 
 
+class InstallPlatlib(install):
+    def finalize_options(self):
+        install.finalize_options(self)
+        if self.distribution.has_ext_modules():
+            self.install_lib = self.install_platlib
+
+
 if __name__ == "__main__":
     setup(name=os.getenv('CAMB_PACKAGE_NAME', 'camb'),
           version=find_version(),
@@ -294,7 +301,7 @@ if __name__ == "__main__":
           cmdclass={'build_py': SharedLibrary, 'build_cluster': SharedLibraryCluster,
                     'make': MakeLibrary, 'make_cluster': MakeLibraryCluster, 'clean': CleanLibrary,
                     'develop': DevelopLibrary, 'develop_cluster': DevelopLibraryCluster,
-                    'bdist_wheel': BDistWheelNonPure},
+                    'bdist_wheel': BDistWheelNonPure, 'install': InstallPlatlib},
           packages=['camb', 'camb.tests'],
           platforms="any",
           package_data={'camb': [DLLNAME, 'HighLExtrapTemplate_lenspotentialCls.dat',
