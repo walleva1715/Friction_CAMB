@@ -11,6 +11,7 @@ from setuptools.command.build_py import build_py
 from setuptools.command.develop import develop
 from distutils.command.clean import clean
 from distutils.core import Command
+from wheel.bdist_wheel import bdist_wheel as _bdist_wheel
 
 file_dir = os.path.abspath(os.path.dirname(__file__))
 os.chdir(file_dir)
@@ -269,6 +270,12 @@ class CleanLibrary(clean):
         clean.run(self)
 
 
+class BDistWheelNonPure(_bdist_wheel):
+    def finalize_options(self):
+        _bdist_wheel.finalize_options(self)
+        self.root_is_pure = False
+
+
 if __name__ == "__main__":
     setup(name=os.getenv('CAMB_PACKAGE_NAME', 'camb'),
           version=find_version(),
@@ -286,7 +293,8 @@ if __name__ == "__main__":
           zip_safe=False,
           cmdclass={'build_py': SharedLibrary, 'build_cluster': SharedLibraryCluster,
                     'make': MakeLibrary, 'make_cluster': MakeLibraryCluster, 'clean': CleanLibrary,
-                    'develop': DevelopLibrary, 'develop_cluster': DevelopLibraryCluster},
+                    'develop': DevelopLibrary, 'develop_cluster': DevelopLibraryCluster,
+                    'bdist_wheel': BDistWheelNonPure},
           packages=['camb', 'camb.tests'],
           platforms="any",
           package_data={'camb': [DLLNAME, 'HighLExtrapTemplate_lenspotentialCls.dat',
