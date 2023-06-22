@@ -3142,7 +3142,7 @@
     !  Get the propagation equation for the shear
 
     if (State%flat) then
-        aytprime(ixt_shear)=-2*adotoa*shear+k*Hchi-rhopi/k
+        aytprime(ixt_shear)=-(2 + CP%nu_0)*adotoa*shear+k*Hchi-rhopi/k
     else
         aytprime(ixt_shear)=-2*adotoa*shear+k*Hchi*(1+2*State%curv/k2)-rhopi/k
     endif
